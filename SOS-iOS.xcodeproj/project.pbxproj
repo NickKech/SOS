@@ -12,13 +12,13 @@
 		9D88DBAD1B9CD95C00B94AE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D88DBAB1B9CD95C00B94AE3 /* Main.storyboard */; };
 		9D88DBAF1B9CD95D00B94AE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D88DBAE1B9CD95D00B94AE3 /* Assets.xcassets */; };
 		9D88DBB21B9CD95D00B94AE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D88DBB01B9CD95D00B94AE3 /* LaunchScreen.storyboard */; };
-		9D88DBBA1B9CE30000B94AE3 /* LabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D88DBB91B9CE30000B94AE3 /* LabelNode.swift */; settings = {ASSET_TAGS = (); }; };
-		9D88DBBF1B9CE34F00B94AE3 /* letter.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D88DBBC1B9CE34F00B94AE3 /* letter.mp3 */; settings = {ASSET_TAGS = (); }; };
-		9D88DBC01B9CE34F00B94AE3 /* sos.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D88DBBD1B9CE34F00B94AE3 /* sos.mp3 */; settings = {ASSET_TAGS = (); }; };
-		9D88DBC11B9CE34F00B94AE3 /* winner.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D88DBBE1B9CE34F00B94AE3 /* winner.mp3 */; settings = {ASSET_TAGS = (); }; };
-		9D88DBC31B9CE35700B94AE3 /* CellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D88DBC21B9CE35700B94AE3 /* CellNode.swift */; settings = {ASSET_TAGS = (); }; };
-		9D88DBC51B9CE36600B94AE3 /* Enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D88DBC41B9CE36600B94AE3 /* Enumerations.swift */; settings = {ASSET_TAGS = (); }; };
-		9D88DBC71B9CE37300B94AE3 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D88DBC61B9CE37300B94AE3 /* GameScene.swift */; settings = {ASSET_TAGS = (); }; };
+		9D88DBBA1B9CE30000B94AE3 /* LabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D88DBB91B9CE30000B94AE3 /* LabelNode.swift */; };
+		9D88DBBF1B9CE34F00B94AE3 /* letter.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D88DBBC1B9CE34F00B94AE3 /* letter.mp3 */; };
+		9D88DBC01B9CE34F00B94AE3 /* sos.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D88DBBD1B9CE34F00B94AE3 /* sos.mp3 */; };
+		9D88DBC11B9CE34F00B94AE3 /* winner.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D88DBBE1B9CE34F00B94AE3 /* winner.mp3 */; };
+		9D88DBC31B9CE35700B94AE3 /* CellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D88DBC21B9CE35700B94AE3 /* CellNode.swift */; };
+		9D88DBC51B9CE36600B94AE3 /* Enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D88DBC41B9CE36600B94AE3 /* Enumerations.swift */; };
+		9D88DBC71B9CE37300B94AE3 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D88DBC61B9CE37300B94AE3 /* GameScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -323,6 +323,7 @@
 				9D88DBB81B9CD95D00B94AE3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
