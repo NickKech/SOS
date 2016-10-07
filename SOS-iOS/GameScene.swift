@@ -31,14 +31,14 @@ class GameScene: SKScene {
     
     var arrow: SKSpriteNode!
     
-    var currentPlayer: Int = Player.None.rawValue {
+    var currentPlayer: Int = Player.none.rawValue {
         didSet {
-            if currentPlayer == Player.PlayerTwo.rawValue {
-                arrow.position = CGPointMake(size.width * 0.81, size.height * 0.95)
-            } else if currentPlayer == Player.PlayerOne.rawValue {
-                arrow.position = CGPointMake(size.width * 0.19, size.height * 0.95)
+            if currentPlayer == Player.playerTwo.rawValue {
+                arrow.position = CGPoint(x: size.width * 0.81, y: size.height * 0.95)
+            } else if currentPlayer == Player.playerOne.rawValue {
+                arrow.position = CGPoint(x: size.width * 0.19, y: size.height * 0.95)
             } else {
-                arrow.position = CGPointMake(size.width * 0.50, size.height * 0.95)
+                arrow.position = CGPoint(x: size.width * 0.50, y: size.height * 0.95)
             }
         }
     }
@@ -63,7 +63,7 @@ class GameScene: SKScene {
     
     
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         backgroundColor = SKColor(red: 143.0 / 255.0, green: 119.0 / 255.0, blue: 97.0 / 255.0, alpha: 1.0)
         
         createGameBoard()
@@ -81,10 +81,10 @@ class GameScene: SKScene {
         let number1 = arc4random()
         let number2 = arc4random()
         
-        let delay = SKAction.waitForDuration(3)
+        let delay = SKAction.wait(forDuration: 3)
         
-        let moveRight = SKAction.moveTo(CGPoint(x: size.width * 0.50, y: size.height * 0.95), duration: 0.2)
-        let moveLeft = SKAction.moveTo(CGPoint(x: size.width * 0.50, y: size.height * 0.95), duration: 0.2)
+        let moveRight = SKAction.move(to: CGPoint(x: size.width * 0.50, y: size.height * 0.95), duration: 0.2)
+        let moveLeft = SKAction.move(to: CGPoint(x: size.width * 0.50, y: size.height * 0.95), duration: 0.2)
         
         var sequence: SKAction!
         if number1 > number2 {
@@ -93,11 +93,11 @@ class GameScene: SKScene {
             sequence = SKAction.sequence([delay, moveRight, moveLeft, moveRight, moveLeft, moveRight])
         }
         
-        arrow.runAction(sequence, completion: {
+        arrow.run(sequence, completion: {
             if number1 > number2 {
-                self.currentPlayer = Player.PlayerOne.rawValue
+                self.currentPlayer = Player.playerOne.rawValue
             } else {
-                self.currentPlayer = Player.PlayerTwo.rawValue
+                self.currentPlayer = Player.playerTwo.rawValue
             }
         })
     }
@@ -109,7 +109,7 @@ class GameScene: SKScene {
         arrow = SKSpriteNode(imageNamed: "Arrow")
         arrow.name = "Arrow"
         arrow.position = CGPoint(x: size.width * 0.19, y: size.height * 0.95)
-        arrow.zPosition = zPozitionValue.Hud.rawValue - 1
+        arrow.zPosition = zPozitionValue.hud.rawValue - 1
         addChild(arrow)
     }
 
@@ -119,28 +119,28 @@ class GameScene: SKScene {
         playerOneLabel.fontSize = 32
         playerOneLabel.text = "Player One"
         playerOneLabel.position = CGPoint(x: size.width * 0.19, y: size.height * 0.87)
-        playerOneLabel.zPosition = zPozitionValue.Hud.rawValue
+        playerOneLabel.zPosition = zPozitionValue.hud.rawValue
         playerOneLabel.fontColor = SKColor(red: 90.0 / 255.0, green: 67.0 / 255.0, blue: 146.0 / 255.0, alpha: 1.0)
         addChild(playerOneLabel)
         /* 2 */
         playerOneScoreLabel.fontSize = 48
         playerOneScoreLabel.text = "0"
         playerOneScoreLabel.position = CGPoint(x: size.width * 0.19, y: size.height * 0.82)
-        playerOneScoreLabel.zPosition = zPozitionValue.Hud.rawValue
+        playerOneScoreLabel.zPosition = zPozitionValue.hud.rawValue
         playerOneScoreLabel.fontColor = SKColor(red: 90.0 / 255.0, green: 67.0 / 255.0, blue: 146.0 / 255.0, alpha: 1.0)
         addChild(playerOneScoreLabel)
         /* 1 */
         playerTwoLabel.fontSize = 32
         playerTwoLabel.text = "Player Two"
         playerTwoLabel.position = CGPoint(x: size.width * 0.81, y: size.height * 0.87)
-        playerTwoLabel.zPosition = zPozitionValue.Hud.rawValue
+        playerTwoLabel.zPosition = zPozitionValue.hud.rawValue
         playerTwoLabel.fontColor = SKColor(red: 74.0 / 255.0, green: 226.0 / 255.0, blue: 204.0 / 255.0, alpha: 1.0)
         addChild(playerTwoLabel)
         /* 2 */
         playerTwoScoreLabel.fontSize = 48
         playerTwoScoreLabel.text = "0"
         playerTwoScoreLabel.position = CGPoint(x: size.width * 0.81, y: size.height * 0.82)
-        playerTwoScoreLabel.zPosition = zPozitionValue.Hud.rawValue
+        playerTwoScoreLabel.zPosition = zPozitionValue.hud.rawValue
         playerTwoScoreLabel.fontColor = SKColor(red: 74.0 / 255.0, green: 226.0 / 255.0, blue: 204.0 / 255.0, alpha: 1.0)
         addChild(playerTwoScoreLabel)
     }
@@ -156,9 +156,9 @@ class GameScene: SKScene {
     
     
     
-    func addLetter(imageNamed: String, location: CGPoint) {
+    func addLetter(_ imageNamed: String, location: CGPoint) {
         let letter = SKSpriteNode(imageNamed: imageNamed)
-        letter.zPosition = zPozitionValue.Selected.rawValue
+        letter.zPosition = zPozitionValue.selected.rawValue
         letter.position = location
         letter.name = imageNamed
         addChild(letter)
@@ -181,7 +181,7 @@ class GameScene: SKScene {
                 
                 let cell =  CellNode(textureNamed: SKTexture(imageNamed: "Cell"))
                 cell.name = "Cell"
-                cell.zPosition = zPozitionValue.Cell.rawValue
+                cell.zPosition = zPozitionValue.cell.rawValue
                 cell.position = CGPoint(x: Px, y: Py)
                 addChild(cell)
                 
@@ -191,17 +191,17 @@ class GameScene: SKScene {
         }
     }
     
-    func checkPatterns(row:Int, col:Int) {
+    func checkPatterns(_ row:Int, col:Int) {
         let cell = cells[row][col]
         
-        if cell.state == CellState.LetterO.rawValue {
+        if cell.state == CellState.letterO.rawValue {
             checkPatternsForLetterO(row, col:col)
         } else {
             checkPatternsForLetterS(row, col:col)
         }
     }
     
-    func isCellState(state: Int, row: Int, col: Int) -> Bool {
+    func isCellState(_ state: Int, row: Int, col: Int) -> Bool {
         if row < 0 || row > numberOfRows - 1 {
             return false
         }
@@ -218,102 +218,102 @@ class GameScene: SKScene {
         }
     }
     
-    func highlightSOS(array: [CellNode]){
+    func highlightSOS(_ array: [CellNode]){
         hasMadeSOS = true
         
         for cell in array {
             cell.setCellColorForPlayer(currentPlayer)
         }
-        runAction(soundMakeSOS)
+        run(soundMakeSOS)
         
-        if currentPlayer == Player.PlayerOne.rawValue {
-            scoreOneCounter++
+        if currentPlayer == Player.playerOne.rawValue {
+            scoreOneCounter += 1
         }
         
-        if currentPlayer == Player.PlayerTwo.rawValue {
-            scoreTwoCounter++
+        if currentPlayer == Player.playerTwo.rawValue {
+            scoreTwoCounter += 1
         }
     }
 
 
-    func checkPatternsForLetterO(row:Int, col:Int) {
+    func checkPatternsForLetterO(_ row:Int, col:Int) {
         /* Line 1 */
-        if isCellState(CellState.LetterS.rawValue, row: row-1, col: col) && isCellState(CellState.LetterS.rawValue, row: row+1, col: col) {
+        if isCellState(CellState.letterS.rawValue, row: row-1, col: col) && isCellState(CellState.letterS.rawValue, row: row+1, col: col) {
             /* 1 */
             highlightSOS([cells[row][col], cells[row-1][col], cells[row+1][col]])
         }
         
         /* Line 2 */
-        if isCellState(CellState.LetterS.rawValue, row: row, col: col-1) && isCellState(CellState.LetterS.rawValue, row: row, col: col+1) {
+        if isCellState(CellState.letterS.rawValue, row: row, col: col-1) && isCellState(CellState.letterS.rawValue, row: row, col: col+1) {
             /* 1 */
             highlightSOS([cells[row][col], cells[row][col-1], cells[row][col+1]])
         }
         
         /* Line 3 */
-        if isCellState(CellState.LetterS.rawValue, row: row-1, col: col-1) && isCellState(CellState.LetterS.rawValue, row: row+1, col: col+1) {
+        if isCellState(CellState.letterS.rawValue, row: row-1, col: col-1) && isCellState(CellState.letterS.rawValue, row: row+1, col: col+1) {
             /* 1 */
             highlightSOS([cells[row][col], cells[row-1][col-1], cells[row+1][col+1]])
         }
         
         /* Line 4 */
-        if isCellState(CellState.LetterS.rawValue, row: row-1, col: col+1) && isCellState(CellState.LetterS.rawValue, row: row+1, col: col-1) {
+        if isCellState(CellState.letterS.rawValue, row: row-1, col: col+1) && isCellState(CellState.letterS.rawValue, row: row+1, col: col-1) {
             /* 1 */
             highlightSOS([cells[row][col], cells[row-1][col+1], cells[row+1][col-1]])
         }
     }
     
-    func checkPatternsForLetterS(row:Int, col:Int) {
+    func checkPatternsForLetterS(_ row:Int, col:Int) {
         /* Line 1 */
-        if isCellState(CellState.LetterO.rawValue, row: row-1, col: col-1) && isCellState(CellState.LetterS.rawValue, row: row-2, col: col-2) {
+        if isCellState(CellState.letterO.rawValue, row: row-1, col: col-1) && isCellState(CellState.letterS.rawValue, row: row-2, col: col-2) {
             /* 2 */
             highlightSOS([cells[row][col], cells[row-1][col-1], cells[row-2][col-2]])
         }
         
         /* Line 2 */
-        if isCellState(CellState.LetterO.rawValue, row: row-1, col: col) && isCellState(CellState.LetterS.rawValue, row: row-2, col: col) {
+        if isCellState(CellState.letterO.rawValue, row: row-1, col: col) && isCellState(CellState.letterS.rawValue, row: row-2, col: col) {
             /* 2 */
             highlightSOS([cells[row][col], cells[row-1][col], cells[row-2][col]])
         }
         
         /* Line 3 */
-        if isCellState(CellState.LetterO.rawValue, row: row-1, col: col+1) && isCellState(CellState.LetterS.rawValue, row: row-2, col: col+2) {
+        if isCellState(CellState.letterO.rawValue, row: row-1, col: col+1) && isCellState(CellState.letterS.rawValue, row: row-2, col: col+2) {
             /* 2 */
             highlightSOS([cells[row][col], cells[row-1][col+1], cells[row-2][col+2]])
         }
         
         /* Line 4 */
-        if isCellState(CellState.LetterO.rawValue, row: row, col: col+1) && isCellState(CellState.LetterS.rawValue, row: row, col: col+2) {
+        if isCellState(CellState.letterO.rawValue, row: row, col: col+1) && isCellState(CellState.letterS.rawValue, row: row, col: col+2) {
             /* 2 */
             highlightSOS([cells[row][col], cells[row][col+1], cells[row][col+2]])
         }
         
         /* Line 5 */
-        if isCellState(CellState.LetterO.rawValue, row: row+1, col: col+1) && isCellState(CellState.LetterS.rawValue, row: row+2, col: col+2) {
+        if isCellState(CellState.letterO.rawValue, row: row+1, col: col+1) && isCellState(CellState.letterS.rawValue, row: row+2, col: col+2) {
             /* 2 */
             highlightSOS([cells[row][col], cells[row+1][col+1], cells[row+2][col+2]])
         }
         
         /* Line 6 */
-        if isCellState(CellState.LetterO.rawValue, row: row+1, col: col) && isCellState(CellState.LetterS.rawValue, row: row+2, col: col) {
+        if isCellState(CellState.letterO.rawValue, row: row+1, col: col) && isCellState(CellState.letterS.rawValue, row: row+2, col: col) {
             /* 2 */
             highlightSOS([cells[row][col], cells[row+1][col], cells[row+2][col]])
         }
         
         /* Line 7 */
-        if isCellState(CellState.LetterO.rawValue, row: row+1, col: col-1) && isCellState(CellState.LetterS.rawValue, row: row+2, col: col-2) {
+        if isCellState(CellState.letterO.rawValue, row: row+1, col: col-1) && isCellState(CellState.letterS.rawValue, row: row+2, col: col-2) {
             /* 2 */
             highlightSOS([cells[row][col], cells[row+1][col-1], cells[row+2][col-2]])
         }
         
         /* Line 8 */
-        if isCellState(CellState.LetterO.rawValue, row: row, col: col-1) && isCellState(CellState.LetterS.rawValue, row: row, col: col-2) {
+        if isCellState(CellState.letterO.rawValue, row: row, col: col-1) && isCellState(CellState.letterS.rawValue, row: row, col: col-2) {
             /* 2 */
             highlightSOS([cells[row][col], cells[row][col-1], cells[row][col-2]])
         }
     }
 
     
-    func placeSelectedLetter(completion:() -> ()) {
+    func placeSelectedLetter(_ completion:@escaping () -> ()) {
         let location = selectedLetter?.position
         
         for row in 0 ..< numberOfRows {
@@ -321,14 +321,14 @@ class GameScene: SKScene {
                 let cell = cells[row][col]
                 
                 if cell.frame.contains(location!) {
-                    if cell.state == CellState.Empty.rawValue {
+                    if cell.state == CellState.empty.rawValue {
                         self.hasLetterPlaced = true
                         if selectedLetter?.name == "LetterS" {
-                            cell.setStateValue(CellState.LetterS.rawValue)
+                            cell.setStateValue(CellState.letterS.rawValue)
                         } else {
-                            cell.setStateValue(CellState.LetterO.rawValue)
+                            cell.setStateValue(CellState.letterO.rawValue)
                         }
-                        runAction(soundSetLetter)
+                        run(soundSetLetter)
                         
                         self.checkPatterns(row, col: col)
                         
@@ -346,26 +346,26 @@ class GameScene: SKScene {
         
         selectedLetter = nil
         
-        runAction(SKAction.waitForDuration(0.10), completion: completion)
+        run(SKAction.wait(forDuration: 0.10), completion: completion)
     }
 
     func showWinner() {
         if hasLetterPlaced == true {
             if isGridFull() {
                 if scoreOneCounter > scoreTwoCounter {
-                    currentPlayer = Player.None.rawValue
+                    currentPlayer = Player.none.rawValue
                 } else if scoreOneCounter < scoreTwoCounter {
-                    currentPlayer = Player.None.rawValue
+                    currentPlayer = Player.none.rawValue
                 } else {
-                    currentPlayer = Player.None.rawValue
+                    currentPlayer = Player.none.rawValue
                 }
-                runAction(soundWin)
+                run(soundWin)
             } else {
                 if hasMadeSOS == false {
-                    if self.currentPlayer == Player.PlayerOne.rawValue {
-                        self.currentPlayer = Player.PlayerTwo.rawValue
+                    if self.currentPlayer == Player.playerOne.rawValue {
+                        self.currentPlayer = Player.playerTwo.rawValue
                     } else {
-                        self.currentPlayer = Player.PlayerOne.rawValue
+                        self.currentPlayer = Player.playerOne.rawValue
                     }
                 }
             }
@@ -376,7 +376,7 @@ class GameScene: SKScene {
         for row in 0 ..< numberOfRows {
             for col in 0 ..< numberOfCols {
                 let cell = cells[row][col]
-                if cell.state == CellState.Empty.rawValue {
+                if cell.state == CellState.empty.rawValue {
                     return false
                 }
             }
@@ -384,15 +384,15 @@ class GameScene: SKScene {
         return true
     }
 
-    override func update(currentTime: CFTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         /* Called before each frame is rendered */
     }
     
     
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-    let location = touches.first?.locationInNode(self)
-        let node = nodeAtPoint(location!)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    let location = touches.first?.location(in: self)
+        let node = atPoint(location!)
         
         hasLetterPlaced = false
         hasMadeSOS = false
@@ -400,11 +400,11 @@ class GameScene: SKScene {
         if node.name == "LetterS" || node.name == "LetterO" {
             selectedLetter = node as? SKSpriteNode
             selectedLetter?.position = location!
-            selectedLetter?.zPosition = zPozitionValue.Selected.rawValue
+            selectedLetter?.zPosition = zPozitionValue.selected.rawValue
         }
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
    
         if selectedLetter != nil {
             self.placeSelectedLetter() {
@@ -413,8 +413,8 @@ class GameScene: SKScene {
         }
     }
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-    let location = touches.first?.locationInNode(self)
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    let location = touches.first?.location(in: self)
         if selectedLetter != nil {
             selectedLetter?.position = location!
         }

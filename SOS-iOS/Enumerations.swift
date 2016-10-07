@@ -9,9 +9,9 @@
 import SpriteKit
 
 enum Player: Int {
-    case None, PlayerOne, PlayerTwo
+    case none, playerOne, playerTwo
 }
 
 enum zPozitionValue: CGFloat {
-    case Cell, Hud, Selected
+    case cell, hud, selected
 }
