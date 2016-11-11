@@ -36,7 +36,7 @@ class CellNode: SKSpriteNode {
   }
   
   /* 1 */
-  func setStateValue(_ state: Int) {
+  func setStateValue(state: Int) {
     self.state = state
     if state == CellState.letterO.rawValue {
       letter.texture = SKTexture(imageNamed: "LetterO")
@@ -50,7 +50,7 @@ class CellNode: SKSpriteNode {
   }
   
   /* 2 */
-  func setCellColorForPlayer(_ playerID: Int) {
+  func setCellColorForPlayer(playerID: Int) {
     if playerID == Player.playerOne.rawValue {
     self.color = SKColor(red: 90.0/255.0, green: 67.0/255.0, blue: 146.0/255.0, alpha: 1.0)
   } else if playerID == Player.playerTwo.rawValue {

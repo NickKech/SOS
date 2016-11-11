@@ -150,13 +150,13 @@ class GameScene: SKScene {
         locationLetterO = CGPoint(x: size.width * 0.58, y: size.height * 0.88)
         locationLetterS = CGPoint(x: size.width * 0.42, y: size.height * 0.88)
         
-        addLetter("LetterS", location: locationLetterS)
-        addLetter("LetterO", location: locationLetterO)
+        addLetter(imageNamed: "LetterS", location: locationLetterS)
+        addLetter(imageNamed: "LetterO", location: locationLetterO)
     }
     
     
     
-    func addLetter(_ imageNamed: String, location: CGPoint) {
+    func addLetter(imageNamed: String, location: CGPoint) {
         let letter = SKSpriteNode(imageNamed: imageNamed)
         letter.zPosition = zPozitionValue.selected.rawValue
         letter.position = location
@@ -191,17 +191,17 @@ class GameScene: SKScene {
         }
     }
     
-    func checkPatterns(_ row:Int, col:Int) {
+    func checkPatterns(row:Int, col:Int) {
         let cell = cells[row][col]
         
         if cell.state == CellState.letterO.rawValue {
-            checkPatternsForLetterO(row, col:col)
+            checkPatternsForLetterO(row: row, col:col)
         } else {
-            checkPatternsForLetterS(row, col:col)
+            checkPatternsForLetterS(row: row, col:col)
         }
     }
     
-    func isCellState(_ state: Int, row: Int, col: Int) -> Bool {
+    func isCellState(state: Int, row: Int, col: Int) -> Bool {
         if row < 0 || row > numberOfRows - 1 {
             return false
         }
@@ -218,11 +218,11 @@ class GameScene: SKScene {
         }
     }
     
-    func highlightSOS(_ array: [CellNode]){
+    func highlightSOS(array: [CellNode]){
         hasMadeSOS = true
         
         for cell in array {
-            cell.setCellColorForPlayer(currentPlayer)
+            cell.setCellColorForPlayer(playerID: currentPlayer)
         }
         run(soundMakeSOS)
         
@@ -236,84 +236,84 @@ class GameScene: SKScene {
     }
 
 
-    func checkPatternsForLetterO(_ row:Int, col:Int) {
+    func checkPatternsForLetterO(row:Int, col:Int) {
         /* Line 1 */
-        if isCellState(CellState.letterS.rawValue, row: row-1, col: col) && isCellState(CellState.letterS.rawValue, row: row+1, col: col) {
+        if isCellState(state: CellState.letterS.rawValue, row: row-1, col: col) && isCellState(state: CellState.letterS.rawValue, row: row+1, col: col) {
             /* 1 */
-            highlightSOS([cells[row][col], cells[row-1][col], cells[row+1][col]])
+            highlightSOS(array: [cells[row][col], cells[row-1][col], cells[row+1][col]])
         }
         
         /* Line 2 */
-        if isCellState(CellState.letterS.rawValue, row: row, col: col-1) && isCellState(CellState.letterS.rawValue, row: row, col: col+1) {
+        if isCellState(state: CellState.letterS.rawValue, row: row, col: col-1) && isCellState(state: CellState.letterS.rawValue, row: row, col: col+1) {
             /* 1 */
-            highlightSOS([cells[row][col], cells[row][col-1], cells[row][col+1]])
+            highlightSOS(array: [cells[row][col], cells[row][col-1], cells[row][col+1]])
         }
         
         /* Line 3 */
-        if isCellState(CellState.letterS.rawValue, row: row-1, col: col-1) && isCellState(CellState.letterS.rawValue, row: row+1, col: col+1) {
+        if isCellState(state: CellState.letterS.rawValue, row: row-1, col: col-1) && isCellState(state: CellState.letterS.rawValue, row: row+1, col: col+1) {
             /* 1 */
-            highlightSOS([cells[row][col], cells[row-1][col-1], cells[row+1][col+1]])
+            highlightSOS(array: [cells[row][col], cells[row-1][col-1], cells[row+1][col+1]])
         }
         
         /* Line 4 */
-        if isCellState(CellState.letterS.rawValue, row: row-1, col: col+1) && isCellState(CellState.letterS.rawValue, row: row+1, col: col-1) {
+        if isCellState(state: CellState.letterS.rawValue, row: row-1, col: col+1) && isCellState(state: CellState.letterS.rawValue, row: row+1, col: col-1) {
             /* 1 */
-            highlightSOS([cells[row][col], cells[row-1][col+1], cells[row+1][col-1]])
+            highlightSOS(array: [cells[row][col], cells[row-1][col+1], cells[row+1][col-1]])
         }
     }
     
-    func checkPatternsForLetterS(_ row:Int, col:Int) {
+    func checkPatternsForLetterS(row:Int, col:Int) {
         /* Line 1 */
-        if isCellState(CellState.letterO.rawValue, row: row-1, col: col-1) && isCellState(CellState.letterS.rawValue, row: row-2, col: col-2) {
+        if isCellState(state: CellState.letterO.rawValue, row: row-1, col: col-1) && isCellState(state: CellState.letterS.rawValue, row: row-2, col: col-2) {
             /* 2 */
-            highlightSOS([cells[row][col], cells[row-1][col-1], cells[row-2][col-2]])
+            highlightSOS(array: [cells[row][col], cells[row-1][col-1], cells[row-2][col-2]])
         }
         
         /* Line 2 */
-        if isCellState(CellState.letterO.rawValue, row: row-1, col: col) && isCellState(CellState.letterS.rawValue, row: row-2, col: col) {
+        if isCellState(state: CellState.letterO.rawValue, row: row-1, col: col) && isCellState(state: CellState.letterS.rawValue, row: row-2, col: col) {
             /* 2 */
-            highlightSOS([cells[row][col], cells[row-1][col], cells[row-2][col]])
+            highlightSOS(array: [cells[row][col], cells[row-1][col], cells[row-2][col]])
         }
         
         /* Line 3 */
-        if isCellState(CellState.letterO.rawValue, row: row-1, col: col+1) && isCellState(CellState.letterS.rawValue, row: row-2, col: col+2) {
+        if isCellState(state: CellState.letterO.rawValue, row: row-1, col: col+1) && isCellState(state: CellState.letterS.rawValue, row: row-2, col: col+2) {
             /* 2 */
-            highlightSOS([cells[row][col], cells[row-1][col+1], cells[row-2][col+2]])
+            highlightSOS(array: [cells[row][col], cells[row-1][col+1], cells[row-2][col+2]])
         }
         
         /* Line 4 */
-        if isCellState(CellState.letterO.rawValue, row: row, col: col+1) && isCellState(CellState.letterS.rawValue, row: row, col: col+2) {
+        if isCellState(state: CellState.letterO.rawValue, row: row, col: col+1) && isCellState(state: CellState.letterS.rawValue, row: row, col: col+2) {
             /* 2 */
-            highlightSOS([cells[row][col], cells[row][col+1], cells[row][col+2]])
+            highlightSOS(array: [cells[row][col], cells[row][col+1], cells[row][col+2]])
         }
         
         /* Line 5 */
-        if isCellState(CellState.letterO.rawValue, row: row+1, col: col+1) && isCellState(CellState.letterS.rawValue, row: row+2, col: col+2) {
+        if isCellState(state: CellState.letterO.rawValue, row: row+1, col: col+1) && isCellState(state: CellState.letterS.rawValue, row: row+2, col: col+2) {
             /* 2 */
-            highlightSOS([cells[row][col], cells[row+1][col+1], cells[row+2][col+2]])
+            highlightSOS(array: [cells[row][col], cells[row+1][col+1], cells[row+2][col+2]])
         }
         
         /* Line 6 */
-        if isCellState(CellState.letterO.rawValue, row: row+1, col: col) && isCellState(CellState.letterS.rawValue, row: row+2, col: col) {
+        if isCellState(state: CellState.letterO.rawValue, row: row+1, col: col) && isCellState(state: CellState.letterS.rawValue, row: row+2, col: col) {
             /* 2 */
-            highlightSOS([cells[row][col], cells[row+1][col], cells[row+2][col]])
+            highlightSOS(array: [cells[row][col], cells[row+1][col], cells[row+2][col]])
         }
         
         /* Line 7 */
-        if isCellState(CellState.letterO.rawValue, row: row+1, col: col-1) && isCellState(CellState.letterS.rawValue, row: row+2, col: col-2) {
+        if isCellState(state: CellState.letterO.rawValue, row: row+1, col: col-1) && isCellState(state: CellState.letterS.rawValue, row: row+2, col: col-2) {
             /* 2 */
-            highlightSOS([cells[row][col], cells[row+1][col-1], cells[row+2][col-2]])
+            highlightSOS(array: [cells[row][col], cells[row+1][col-1], cells[row+2][col-2]])
         }
         
         /* Line 8 */
-        if isCellState(CellState.letterO.rawValue, row: row, col: col-1) && isCellState(CellState.letterS.rawValue, row: row, col: col-2) {
+        if isCellState(state: CellState.letterO.rawValue, row: row, col: col-1) && isCellState(state: CellState.letterS.rawValue, row: row, col: col-2) {
             /* 2 */
-            highlightSOS([cells[row][col], cells[row][col-1], cells[row][col-2]])
+            highlightSOS(array: [cells[row][col], cells[row][col-1], cells[row][col-2]])
         }
     }
 
     
-    func placeSelectedLetter(_ completion:@escaping () -> ()) {
+    func placeSelectedLetter(completion:@escaping () -> ()) {
         let location = selectedLetter?.position
         
         for row in 0 ..< numberOfRows {
@@ -324,13 +324,13 @@ class GameScene: SKScene {
                     if cell.state == CellState.empty.rawValue {
                         self.hasLetterPlaced = true
                         if selectedLetter?.name == "LetterS" {
-                            cell.setStateValue(CellState.letterS.rawValue)
+                            cell.setStateValue(state: CellState.letterS.rawValue)
                         } else {
-                            cell.setStateValue(CellState.letterO.rawValue)
+                            cell.setStateValue(state: CellState.letterO.rawValue)
                         }
                         run(soundSetLetter)
                         
-                        self.checkPatterns(row, col: col)
+                        self.checkPatterns(row: row, col: col)
                         
                         break
                     }
